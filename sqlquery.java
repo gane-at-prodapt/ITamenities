@@ -33,7 +33,7 @@ public class sqlquery {
         }
         
         int result = ps.executeUpdate();
-        
+        connection.close();
 		return (result!=0);
 	}
 	
@@ -67,7 +67,7 @@ public class sqlquery {
         	queries.add(Q);
         	
         }
-		
+        connection.close();
 		return queries;
 	}
 	public static List<Query> getQueriesbyType(String type) throws Exception{
@@ -101,7 +101,7 @@ public class sqlquery {
         		queries.add(Q);
         	}
         }
-		
+        connection.close();
 		return queries;
 	}
 	public static boolean deleteQueryById(int id) throws Exception{
@@ -113,7 +113,7 @@ public class sqlquery {
         String deleteQueryById = "delete from query where id = "+id+";";
         PreparedStatement ps = connection.prepareStatement(deleteQueryById);
         int rs = ps.executeUpdate(deleteQueryById);
-        
+        connection.close();
         return (rs!=0);
 	}
 	public static boolean updateQuery(Query Q) throws Exception{
@@ -125,7 +125,7 @@ public class sqlquery {
         PreparedStatement ps = connection.prepareStatement(updateQuery);
         
         int rs = ps.executeUpdate(updateQuery);
-        
+        connection.close();
         return (rs!=0);
 	}
 }

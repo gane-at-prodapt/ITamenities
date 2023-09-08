@@ -28,6 +28,7 @@ public class sqlRegistry {
 	        	System.out.println(R.getRoom().id);
 	        	System.out.println(result.getInt(2));
 	        	System.out.println("theres room");
+	        	connection.close();
 	        	return false;
 	        }else {
 	        	String bookRoomQuery = "insert into registry(roomId, fromdate, todate, bookedBy) values(?, ?, ?, ?);";
@@ -37,6 +38,7 @@ public class sqlRegistry {
 	        	ps1.setDate(3, todate);
 	        	ps1.setInt(4, R.getBookedBy().id);
 	        	int rs = ps1.executeUpdate();
+	        	connection.close();
 	        	return (rs!=0);
 	        }
 		}else {
@@ -63,6 +65,7 @@ public class sqlRegistry {
         	Registry reg = new Registry(id,R,fromDate,todate,E);
         	registries.add(reg);
         }
+        connection.close();
         return registries;
 	}
 	public static boolean cancelRoom(Registry R) throws Exception {
@@ -74,7 +77,7 @@ public class sqlRegistry {
 	        String deleteQuery = "delete from registry where id="+R.getId();
 	        PreparedStatement ps = connection.prepareStatement(deleteQuery);
 	        int result = ps.executeUpdate();
-	        
+	        connection.close();
 	        return result!=0;
 		}else {
 			return false;

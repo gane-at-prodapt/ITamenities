@@ -9,7 +9,6 @@ import java.util.List;
 
 public class sqlRooms {
 	public static boolean addRoom(Room R) throws Exception {
-		//TODO: change 
 		Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection(
             "jdbc:mysql://localhost:3306/itamenities",
@@ -23,6 +22,7 @@ public class sqlRooms {
         ps.setString(4, R.accessTo);
         ps.setString(5, R.type);
         int result = ps.executeUpdate();
+        connection.close();
 		return result!=0;
 	}
 	
@@ -34,10 +34,9 @@ public class sqlRooms {
         
         String updateRoomQuery = "update room set occupancy = ? where id="+R.id+";";
         PreparedStatement ps = connection.prepareStatement(updateRoomQuery);
-        
         ps.setInt(1, R.occupancy);
-        
         int result = ps.executeUpdate();
+        connection.close();
 		return (result!=0);
 	}
 	
@@ -53,6 +52,7 @@ public class sqlRooms {
         ps.setDouble(1, R.temp);
         
         int result = ps.executeUpdate();
+        connection.close();
 		return (result!=0);
 	}
 	
@@ -79,7 +79,7 @@ public class sqlRooms {
             Room R = new Room(id,name,sqlFloor.getFloorById(currentFloorId),max_occupancy,accessTo,occupancy,type,temp);
             rooms.add(R);
         }
-      
+        connection.close();
         return rooms;
 	}
 	public static List<Cafeteria> getCafsByFloor(int floorId) throws Exception {
@@ -106,7 +106,7 @@ public class sqlRooms {
             Cafeteria C = new Cafeteria(id,name,sqlFloor.getFloorById(currentFloorId),max_occupancy,accessTo,occupancy,type,temp);
             cafeterias.add(C);
         }
-      
+        connection.close();
         return cafeterias;
 	}
 	public static List<Booking> getmeetRoomsByFloor(int floorId) throws Exception{
@@ -132,7 +132,7 @@ public class sqlRooms {
             Booking B = new Booking(id,name,sqlFloor.getFloorById(currentFloorId),max_occupancy,accessTo,occupancy,type,temp);
             booking_rooms.add(B);
         }
-      
+        connection.close();
         return booking_rooms;
 	}
 	public static Room getRoomById(int id) throws Exception {
@@ -157,7 +157,7 @@ public class sqlRooms {
             double temp = rs.getDouble(8);
             R = new Room(id,name,sqlFloor.getFloorById(currentFloorId),max_occupancy,accessTo,occupancy,type,temp);
         }
-      
+        connection.close();
         return R;
 	}
 

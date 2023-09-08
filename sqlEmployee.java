@@ -33,7 +33,7 @@ public class sqlEmployee {
         
         
         int result = Auth.signUp(E.id,E.email,password);
-        
+        connection.close();
 		return result!=0;
 	}
 	
@@ -64,6 +64,7 @@ public class sqlEmployee {
         ps.setString(6,E.role);
         ps.setString(7, E.comm);
         int result = ps.executeUpdate();
+        connection.close();
 		return (result!=0);
 	}
 	
@@ -89,6 +90,7 @@ public class sqlEmployee {
             
             E = new Employee(id,name,type,role,connexion,sqlRooms.getRoomById(roomId),sqlFloor.getFloorById(floorId),email);
         }
+        connection.close();
         return E;
 	}
 	
@@ -115,6 +117,7 @@ public class sqlEmployee {
             Employee E = new Employee(id,name,type,role,connexion,sqlRooms.getRoomById(roomId),sqlFloor.getFloorById(floorid),email);
             employees.add(E);
         }
+        connection.close();
         return employees;
 	}
 	
@@ -141,6 +144,7 @@ public class sqlEmployee {
             Employee E = new Employee(id,name,type,role,connexion,sqlRooms.getRoomById(roomId),sqlFloor.getFloorById(floorid),email);
             employees.add(E);
         }
+        connection.close();
         return employees;
 	}
 

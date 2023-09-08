@@ -32,6 +32,7 @@ public class sqlItem {
         	Item I = new Item(itemId,name,quantity,expiry,currentRoom);
         	items.add(I);
         }
+        connection.close();
         return items;
 	}
 	
@@ -56,6 +57,7 @@ public class sqlItem {
         	
         	I = new Item(itemId,name,quantity,expiry,currentRoom);
         }
+        connection.close();
         return I;
 	}
 	
@@ -73,7 +75,7 @@ public class sqlItem {
         ps.setInt(4, I.getCurrentroom().id);
         
         int result = ps.executeUpdate();
-        
+        connection.close();
 		return (result!=0);
 	}
 	
@@ -89,6 +91,7 @@ public class sqlItem {
         ps.setDate(3,new java.sql.Date(I.getExpiry().getTime()));
         ps.setInt(4,I.getCurrentroom().id);
 		int result = ps.executeUpdate();
+		connection.close();
 		return (result!=0);
 	}
 	
@@ -100,6 +103,7 @@ public class sqlItem {
         String deleteItemQuery = "delete from item where id="+I.getId()+";";
         PreparedStatement ps = connection.prepareStatement(deleteItemQuery);
 		int result = ps.executeUpdate();
+		connection.close();
 		return (result!=0);
 	}
 }

@@ -40,7 +40,7 @@ public class sqlFloor {
             
             F = new Floor(id,name,temperature);	
         }
-        
+        connection.close();
         return F;
 	}
 	
@@ -62,7 +62,7 @@ public class sqlFloor {
             Floor F = new Floor(id,name,temperature);	
             floors.add(F);
         }
-        
+        connection.close();
         return floors;
 	}
 
